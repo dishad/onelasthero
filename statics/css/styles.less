@@ -1,0 +1,43 @@
+@face: sans-serif;
+
+html, body{
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #952d2d;
+}
+
+article {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background-image: url('../images/w1.png');
+  // background-size: cover;
+}
+
+#content {
+  display: block;
+	background-color: #323232;
+	border-radius: 12px;
+  padding: 10px 10px;
+  margin: 100px auto;
+  width: 960px;
+  height: 480px;  
+
+  #canvas {
+    height: 100%;
+    width: 100%;
+    border: solid 1px #fff;
+  }
+
+}
+
+.show {
+  display: block;
+}
+@import "more.less";
+@import "modal.less";
+@import "button.less";
