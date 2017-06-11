@@ -12,34 +12,22 @@
   },
   "engineStrict": true,
   "dependencies": {
-    "roosevelt": "^0.8.6",
+    "roosevelt": "0.8.2",
     "roosevelt-closure": "^0.2.0",
     "roosevelt-less": "^0.2.0",
     "teddy": "^0.4.14"
   },
   "devDependencies": {
     "eslint": "^3.19.0",
-    "stylelint": "^7.10.1",
+    "stylelint": "^7.11.0",
     "stylelint-config-standard": "^16.0.0",
     "supervisor": "*"
   },
   "rooseveltConfig": {
     "port": 43711,
     "localhostOnly": true,
-    "httpsPort": 43733,
-    "https": false,
-    "httpsOnly": false,
-    "pfx": true,
-    "keyPath": null,
-    "passphrase": null,
-    "ca": null,
-    "requestCert": false,
-    "rejectUnauthorized": false,
     "disableLogger": false,
     "noMinify": false,
-    "multipart": {
-      "multiples": true
-    },
     "maxLagPerRequest": 2000,
     "shutdownTimeout": 30000,
     "modelsPath": "mvc/models",
@@ -110,18 +98,13 @@
     "versionedStatics": false,
     "versionedCssFile": null,
     "alwaysHostPublic": false,
-    "bodyParserOptions": {
-      "extended": true
-    },
-    "bodyParserJsonOptions": {},
     "libPath": "lib",
     "libPathNodeModulesSymlink": "lib"
   },
   "eslintConfig": {
     "env": {
       "browser": true,
-      "node": true,
-      "mocha": true
+      "node": true
     },
     "rules": {
       "eqeqeq": 2,
@@ -216,6 +199,6 @@
     "dev": "supervisor -k -e js,json,less,html -i statics/.build/,.git/,public/,node_modules/ -- app.js -dev",
     "eslint": "./node_modules/.bin/eslint .",
     "stylelint": "./node_modules/.bin/stylelint \"statics/css/**/*.less\" --syntax less",
-    "test": "node app.js"
+    "test": "eslint app.js"
   }
 }

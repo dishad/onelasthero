@@ -12,8 +12,6 @@ module.exports = function(backgroundLoc) {
     background.src = backgroundLoc;
     canvas.width = canvasWidth;
     canvas.height = canvasHeight;
-
-    console.log('yooo');
     
     background.onload = function() {
         context.drawImage(background, 0, 0);
@@ -33,7 +31,8 @@ module.exports = function(backgroundLoc) {
             else if (e.keyCode === 40 || e.keyCode === 83) {
                 yPos += 10;
             }
-
+            
+            console.log(xPos, yPos);
             canvas.width = canvasWidth;
             context.drawImage(background, 0, 0);
             context.rect(xPos, yPos, 50, 50);
