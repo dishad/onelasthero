@@ -12,11 +12,10 @@
   },
   "engineStrict": true,
   "dependencies": {
-    "bootbox": "^4.4.0",
-    "roosevelt": "^0.6.0",
+    "roosevelt": "^0.8.2",
     "roosevelt-closure": "^0.2.0",
     "roosevelt-less": "^0.2.0",
-    "teddy": "^0.3.0"
+    "teddy": "^0.4.14"
   },
   "devDependencies": {
     "jshint": "*",
@@ -60,13 +59,44 @@
     "cssCompilerWhitelist": null,
     "cssCompiledOutput": ".build/css",
     "jsPath": "js",
+    "bundledJsPath": "../.build/js",
+    "exposeBundles": true,
+    "browserifyBundles": [
+      {
+        "outputFile": "onelasthero.js",
+        "env": "prod",
+        "files": [
+          "main.js"
+        ],
+        "params": {
+          "paths": [
+            "statics/js"
+          ]
+        }
+      },
+      {
+        "outputFile": "onelasthero.js",
+        "env": "dev",
+        "files": [
+          "main.js"
+        ],
+        "params": {
+          "paths": [
+            "statics/js"
+          ],
+          "debug": true
+        }
+      }
+    ],
     "jsCompiler": {
       "nodeModule": "roosevelt-closure",
       "params": {
         "compilationLevel": "ADVANCED"
       }
     },
-    "jsCompilerWhitelist": null,
+    "jsCompilerWhitelist": [
+      "../.build/js/onelasthero.js:onelasthero-min.js"
+    ],
     "jsCompiledOutput": ".build/js",
     "publicFolder": "public",
     "favicon": "images/favicon.ico",

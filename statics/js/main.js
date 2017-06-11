@@ -1,3 +1,5 @@
+var hero = require('hero');
+
 var w_1 = {
     num_levels: 10,
     monsters: []
@@ -37,6 +39,69 @@ var mage = {
     health: 10
 };
 
+function drawCanvas() {
+    var canvas = document.getElementById('canvas'),
+        context = canvas.getContext('2d'),
+
+        canvasWidth = 962,
+        canvasHeight = 482,
+        xPos = 0,
+        yPos = 0,
+        
+        background = new Image();
+        
+    background.src = ('../images/cave.png');
+    canvas.width = canvasWidth;
+    canvas.height = canvasHeight;
+    
+    background.onload = function() {
+        context.drawImage(background, 0, 0);
+        context.rect(xPos, yPos, 50, 50);
+        context.stroke();
+
+        function move(e) {
+            if (e.keyCode === 37 || e.keyCode === 65) {
+                xPos -= 10;
+            }
+            else if (e.keyCode === 38 || e.keyCode === 87) {
+                yPos -= 10;
+            }
+            else if (e.keyCode === 39 || e.keyCode === 68) {
+                xPos += 10;
+            }
+            else if (e.keyCode === 40 || e.keyCode === 83) {
+                yPos += 10;
+            }
+
+            canvas.width = canvasWidth;
+            context.drawImage(background, 0, 0);
+            context.rect(xPos, yPos, 50, 50);
+            context.stroke();
+        }
+ 
+        document.onkeydown = move;
+    }
+}
+
+function SpriteSheet(path, frameWidth, frameHeight, frameSpeed, endFrame) {
+ 
+  // code removed for brevity
+ 
+  var currentFrame = 0;  // the current frame to draw
+  var counter = 0;       // keep track of frame rate
+ 
+  // Update the animation
+  this.update = function() {
+ 
+    // update to the next frame if it is time
+    if (counter == (frameSpeed - 1))
+      currentFrame = (currentFrame + 1) % endFrame;
+ 
+    // update the counter
+    counter = (counter + 1) % frameSpeed;
+    }
+  };
+
 function changeVocation(choice) {
     if (choice === 'Knight') {
         player = knight;
@@ -60,6 +125,20 @@ function vocationModal() {
 
     createDialog(optionsVocation);
 }
+
+
+
+var lastTime;
+function main() {
+    var now = Date.now();
+    var dt = (now - lastTime) / 1000.0;
+
+    update(dt);
+    render();
+
+    lastTime = now;
+    requestAnimFrame(main);
+};
 
 // Custom modal that changes based on options object
 function createDialog(options) {
@@ -110,35 +189,43 @@ function drawCanvas() {
         canvasWidth = 962,
         canvasHeight = 482,
         xPos = 0,
-        yPos = 0;
-
+        yPos = 0,
+        
+        background = new Image();
+        
+    background.src = ('../images/cave.png');
     canvas.width = canvasWidth;
     canvas.height = canvasHeight;
-    context.rect(xPos, yPos, 50, 50);
-    context.stroke();
-
-    function move(e) {
-        if (e.keyCode === 37 || e.keyCode === 65) {
-            xPos -= 10;
-        }
-        else if (e.keyCode === 38 || e.keyCode === 87) {
-            yPos -= 10;
-        }
-        else if (e.keyCode === 39 || e.keyCode === 68) {
-            xPos += 10;
-        }
-        else if (e.keyCode === 40 || e.keyCode === 83) {
-            yPos += 10;
-        }
-
-        canvas.width = canvasWidth;
+    
+    background.onload = function() {
+        context.drawImage(background, 0, 0);
         context.rect(xPos, yPos, 50, 50);
         context.stroke();
-    }
+
+        function move(e) {
+            if (e.keyCode === 37 || e.keyCode === 65) {
+                xPos -= 10;
+            }
+            else if (e.keyCode === 38 || e.keyCode === 87) {
+                yPos -= 10;
+            }
+            else if (e.keyCode === 39 || e.keyCode === 68) {
+                xPos += 10;
+            }
+            else if (e.keyCode === 40 || e.keyCode === 83) {
+                yPos += 10;
+            }
+
+            canvas.width = canvasWidth;
+            context.drawImage(background, 0, 0);
+            context.rect(xPos, yPos, 50, 50);
+            context.stroke();
+        }
  
-    document.onkeydown = move;
+        document.onkeydown = move;
+    }
 }
 
 window.onload = function() {
-    drawCanvas();
+    hero.drawCanvas('../images/cave.png');
 };
