@@ -1,4 +1,6 @@
 # One Last Hero
+===
+[![Build Status](https://travis-ci.org/dishad/onelasthero.svg?branch=master)](https://travis-ci.org/dishad/onelasthero)
 
 #### Things needed:
 

@@ -199,6 +199,6 @@
     "dev": "supervisor -k -e js,json,less,html -i statics/.build/,.git/,public/,node_modules/ -- app.js -dev",
     "eslint": "./node_modules/.bin/eslint .",
     "stylelint": "./node_modules/.bin/stylelint \"statics/css/**/*.less\" --syntax less",
-    "test": "eslint app.js"
+    "test": "npm run stylelint && npm run eslint"
   }
 }
