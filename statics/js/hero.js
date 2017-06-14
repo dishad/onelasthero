@@ -1,6 +1,6 @@
 var hero = {
-    animate: require('animate'),
-    drawCanvas: require('drawCanvas')
+  animate: require('animate'),
+  sprite: require('sprite')
 };
 
- module.exports = hero; 
+module.exports = hero;

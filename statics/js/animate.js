@@ -1,62 +1,57 @@
-  /**
-   * Request Animation Polyfill
-   */
+module.exports = function(spriteLoc) {
 
-  module.exports = function()  {
-    var requestAnimFrame = (function(){
-    return  window.requestAnimationFrame       ||
-            window.webkitRequestAnimationFrame ||
-            window.mozRequestAnimationFrame    ||
-            window.oRequestAnimationFrame      ||
-            window.msRequestAnimationFrame     ||
-            function(callback, element){
-              window.setTimeout(callback, 1000 / 60);
-            };
-  })();
+//the with and height of our spritesheet
+  var hero = require('hero'),
+      canvas = document.getElementById('canvas'),
+      context = canvas.getContext('2d'),
 
-  function Animation(spritesheet, frameSpeed, startFrame, endFrame) {
- 
-  var animationSequence = [];  // array holding the order of the animation
-  var currentFrame = 0;        // the current frame to draw
-  var counter = 0;             // keep track of frame rate
- 
-  // create the sequence of frame numbers for the animation
-  for (var frameNumber = startFrame; frameNumber <= endFrame; frameNumber++)
-    animationSequence.push(frameNumber);
- 
-  // Update the animation
-  this.update = function() {
- 
-    // update to the next frame if it is time
-    if (counter == (frameSpeed - 1))
-      currentFrame = (currentFrame + 1) % animationSequence.length;
- 
-    // update the counter
-    counter = (counter + 1) % frameSpeed;
-  };
- 
-  // draw the current frame
-  this.draw = function(x, y) {
-    // get the row and col of the frame
-    var row = Math.floor(animationSequence[currentFrame] / spritesheet.framesPerRow);
-    var col = Math.floor(animationSequence[currentFrame] % spritesheet.framesPerRow);
- 
-    ctx.drawImage(
-      spritesheet.image,
-      col * spritesheet.frameWidth, row * spritesheet.frameHeight,
-      spritesheet.frameWidth, spritesheet.frameHeight,
-      x, y,
-      spritesheet.frameWidth, spritesheet.frameHeight);
-  };
-}
+      canvasWidth = 962,
+      canvasHeight = 482,
 
-  function animate() {
-   requestAnimFrame( animate );
-   ctx.clearRect(0, 0, 150, 150);
- 
-   walk.update();
- 
-   walk.draw(12.5, 12.5);
-}
+      x = 0,
+      y = 301,
 
+      character = new Image(),
+      heroSprite;
+
+  character.src = spriteLoc;
+  heroSprite = hero.sprite({
+    context: context,
+    width: 256,
+    height: 64,
+    image: character,
+    dx: x,
+    dy: y
+  });
+
+  canvas.width = canvasWidth;
+  canvas.height = canvasHeight;
+
+  // Start the game loop as soon as the sprite sheet is loaded
+  character.addEventListener('load', gameLoop);
+  function gameLoop () {
+    // var requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
+    window.requestAnimationFrame(gameLoop);
+    heroSprite.update();
+    heroSprite.render();
+  }
+
+  function move(e) {
+    if (e.keyCode === 37 || e.keyCode === 65) {
+      x -= 10;
+    }
+    else if (e.keyCode === 38 || e.keyCode === 87) {
+      y -= 10;
+    }
+    else if (e.keyCode === 39 || e.keyCode === 68) {
+      x += 10;
+    }
+    else if (e.keyCode === 40 || e.keyCode === 83) {
+      y += 10;
+    }
+
+    canvas.width = canvasWidth;
+  }
+
+  document.onkeydown = move;
 };
