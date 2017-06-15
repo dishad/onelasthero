@@ -1,7 +1,8 @@
 # One Last Hero
-===
 
 [![Build Status](https://travis-ci.org/dishad/onelasthero.svg?branch=master)](https://travis-ci.org/dishad/onelasthero)
+
+---
 
 #### Things needed:
 
@@ -23,6 +24,7 @@
 
 `localhost:43711`
 
-===
+---
 
-https://waffle.io/dishad/onelasthero
+### Good Stuff
+* [waffle](https://waffle.io/dishad/onelasthero)
