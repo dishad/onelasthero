@@ -10,8 +10,8 @@ module.exports = function (playerClass) {
     player.class = playerClass;
   }
   else if (playerClass === 'Mage') {
-    player.attack = 2;
-    player.defense = 1;
+    player.attack = 3;
+    player.defense = 0;
     player.class = playerClass;
   }
 
